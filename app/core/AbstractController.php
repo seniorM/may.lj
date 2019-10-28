@@ -16,7 +16,7 @@ abstract class AbstractController {
      */
     public $view;
 
-    public function __constract() {
+    public function __construct() {
 	$this->view = new View();
     }
 
