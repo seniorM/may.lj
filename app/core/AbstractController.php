@@ -3,5 +3,22 @@
 namespace core;
 
 abstract class AbstractController {
-    //put your code here
+
+    /**
+     *
+     * @var AbstractModel 
+     */
+    public $model;
+
+    /**
+     *
+     * @var View
+     */
+    public $view;
+
+    public function __constract() {
+	$this->view = new View();
+    }
+
+    abstract public function index();
 }

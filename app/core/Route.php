@@ -4,6 +4,9 @@ namespace core;
 
 class Route {
 
+    /**
+     * routing /controller/action
+     */
     static public function init() {
 	//TODO create base routing
 	//######################################################################
