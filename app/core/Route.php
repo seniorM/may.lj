@@ -64,5 +64,7 @@ class Route {
 	$view->render('error_404_view');
 	exit();
     }
-
+    static public function redirect(string $url){
+	header('Location:'. $url);
+    }
 }
