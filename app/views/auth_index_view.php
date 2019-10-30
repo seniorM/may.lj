@@ -1,4 +1,4 @@
-<form action="<?= url('/auth/login')?>">
+<form action="<?= url('/auth/login')?>" method="post">
     <label>Login:
 	<input type="text" name="login" required/>
     </label>
