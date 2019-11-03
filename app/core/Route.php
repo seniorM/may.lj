@@ -2,6 +2,8 @@
 
 namespace core;
 
+use models\AuthModel;
+
 class Route {
 
     /**
@@ -20,7 +22,7 @@ class Route {
         //это значение останется в переменной, если не произойдёт перезапись
         $controllerName = 'main';
         //это значение останется в переменной, если не произойдёт перезапись
-        $actionName = 'index';
+        $actionName = 'index'; 
         //забираем дополнительный путь документа в домене и разделяем его на список
         $routeItems = explode('/', $_SERVER['REQUEST_URI']);
         //0-й элемент всегда содержит пустую строку, поэтому удаляем его 
@@ -53,6 +55,9 @@ class Route {
         $controller = new $controllerClassName();
         if (!method_exists($controller, $actionName)) {
             self::error404();
+        }
+        if($controllerName!=='auth' && !AuthModel::haveAuthUser()){
+            Route::redirect(url('/auth'));
         }
         $controller->$actionName();
     }
