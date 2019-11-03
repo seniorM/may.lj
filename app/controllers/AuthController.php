@@ -10,6 +10,9 @@ use models\AuthModel;
 class AuthController extends AbstractController {
 
     public function index() {
+        if(AuthModel::haveAuthUser()){
+            Route::redirect(url('/'));
+        }
         $this->view->render('auth_index_view');
     }
 
