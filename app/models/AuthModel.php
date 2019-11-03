@@ -63,4 +63,12 @@ class AuthModel extends AbstractModel {
         }
     }
 
+    public static function getAuthUser() {
+        if (self::haveAuthUser()) {
+            return $_SESSION['user'];
+        } else {
+            return false;
+        }
+    }
+
 }
