@@ -18,16 +18,14 @@ class AuthController extends AbstractController {
     }
 
     public function regproc() {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            die('not available request method');
-        }
+        $this->_checkMethod('POST');
         $user = filter_input_array(INPUT_POST);
         //TODO все проверки
 
         $errors = Route::userValidate($user);
 
         if (!$errors) {
-            $model = $this->getModel();
+            $model = $this->_getModel();
             $model->addUser($user);
             Route::redirect(url('/auth'));
         } else {
@@ -38,11 +36,31 @@ class AuthController extends AbstractController {
         }
     }
 
-    protected function getModel() {
+    public function login() {
+        $this->_checkMethod('POST');
+        $user = filter_input(INPUT_POST);
+        if(!$this->_getModel()->authenticationUser($user)){
+            //TODO send error to login
+            Route::redirect(url('/auth/index'));
+        }
+        Route::redirect(url('/'));
+    }
+    /**
+     * 
+     * @return type
+     */
+    protected function _getModel() {
         if (!$this->model) {
             $this->model = new AuthModel();
         }
         return $this->model;
+    }
+
+    protected function _checkMethod($method) {
+        $method = strtoupper($method);
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            die('not available request method');
+        }
     }
 
 }
