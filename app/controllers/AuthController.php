@@ -39,12 +39,18 @@ class AuthController extends AbstractController {
     public function login() {
         $this->_checkMethod('POST');
         $user = filter_input_array(INPUT_POST);
-        if(!$this->_getModel()->authenticationUser($user)){
+        if (!$this->_getModel()->authenticationUser($user)) {
             //TODO send error to login
             Route::redirect(url('/auth/index'));
         }
         Route::redirect(url('/'));
     }
+
+    public function logout() {
+        session_destroy();
+        Route::redirect(url('/'));
+    }
+
     /**
      * 
      * @return type
