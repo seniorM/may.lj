@@ -22,7 +22,7 @@ class Route {
         //это значение останется в переменной, если не произойдёт перезапись
         $controllerName = 'main';
         //это значение останется в переменной, если не произойдёт перезапись
-        $actionName = 'index'; 
+        $actionName = 'index';
         //забираем дополнительный путь документа в домене и разделяем его на список
         $routeItems = explode('/', $_SERVER['REQUEST_URI']);
         //0-й элемент всегда содержит пустую строку, поэтому удаляем его 
@@ -56,12 +56,15 @@ class Route {
         if (!method_exists($controller, $actionName)) {
             self::error404();
         }
-        if($controllerName!=='auth' && !AuthModel::haveAuthUser()){
+        if ($controllerName !== 'auth' && !AuthModel::haveAuthUser()) {
             Route::redirect(url('/auth'));
         }
         $controller->$actionName();
     }
 
+    /**
+     * create http status 404
+     */
     static public function error404() {
         http_response_code(404);
         $view = new View();
@@ -69,6 +72,11 @@ class Route {
         exit();
     }
 
+    /**
+     * redirect to specified url
+     * 
+     * @param string $url
+     */
     static public function redirect(string $url) {
         header('Location:' . $url);
     }
@@ -110,6 +118,7 @@ class Route {
         }
         return $errors;
     }
+
     /**
      * clear session
      */
