@@ -34,28 +34,33 @@ class AuthModel extends AbstractModel {
         }
     }
 
-    public function authenticationUser(array$user) {
-        $query = "select * from users where login = '{$user['login']}';";
+    public function authenticationUser(array$requestUser) {
+        $query = "select * from users where login = '{$requestUser['login']}';";
         $result = $this->db->query($query);
-        if($result){
-            $user=$result->fetch_object();
-            $_SESSION['user']=$user;
+        if ($result) {
+            $user = $result->fetch_object();
+            if (!password_verify($requestUser['pass'], $user->pass)) {
+                return false;
+            }
+            $_SESSION['user'] = $user;
             return true;
-        }else{
+        } else {
             return false;
         }
     }
+
     /**
      * check user in session
      * 
      * @return boolean
      */
-    public static function haveAuthUser(){
+    public static function haveAuthUser() {
         //return empty($_SESSION['user']);
-        if(empty($_SESSION['user'])){
+        if (empty($_SESSION['user'])) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
+
 }
