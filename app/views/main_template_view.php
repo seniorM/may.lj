@@ -15,6 +15,7 @@
         <nav>
             <ul>
                 <li><a href="<?= url('/') ?>">Home</a></li>
+                <li><a href="<?= url('/') ?>">News</a></li>
                 <li><?php include 'part_auth_view.php'; ?></li>
             </ul>
         </nav>

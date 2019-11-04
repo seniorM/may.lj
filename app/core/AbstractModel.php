@@ -1,8 +1,11 @@
 <?php
 
 namespace core;
+
 use mysqli;
+
 abstract class AbstractModel {
+
     /**
      *
      * @var mysqli
@@ -15,4 +18,5 @@ abstract class AbstractModel {
             die('failed connect to db');
         }
     }
+
 }
