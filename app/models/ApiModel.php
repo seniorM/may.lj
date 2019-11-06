@@ -6,8 +6,8 @@ use core\AbstractModel;
 
 class ApiModel extends AbstractModel {
 
-    public function getAuthors() {
-	$query = " select * from users;";
+    public function getAllAuthors() {
+	$query = " select id, login, email from users;";
 	$result = $this->db->query($query);
 	if (!$result) {
 	    die($this->db->error);
