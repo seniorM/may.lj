@@ -24,4 +24,13 @@ class ApiController extends AbstractController {
 	echo $json;
     }
 
+    public function getauthorposts() {
+	$id = filter_input(INPUT_GET, 'id');
+	$model = $this->_getModel();
+	$posts = $model->getPostsByAuthorId($id);
+	$json = json_encode($posts);
+	header('Content-type:application/json');
+	echo $json;
+    }
+
 }

@@ -9,7 +9,7 @@ class PostsController extends AbstractController {
 
     public function __construct() {
 	parent::__construct();
-	$this->_modelClass = PostModel::class;
+	$this->_modelClass = PostsModel::class;
     }
 
     public function index() {
